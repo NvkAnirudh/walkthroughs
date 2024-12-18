@@ -6,3 +6,4 @@ python-dotenv
 flask-session
 flask-login
 flask-cors
+flask-mail
