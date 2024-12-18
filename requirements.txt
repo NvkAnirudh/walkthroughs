@@ -1,6 +1,8 @@
 flask
 flask-sqlalchemy
-flask-jwt-extended 
 psycopg2-binary
-bcrypt
+werkzeug
 python-dotenv
+flask-session
+flask-login
+flask-cors

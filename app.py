@@ -1,21 +1,22 @@
-from flask import Flask
-from flask_jwt_extended import JWTManager
-from routes import auth_bp
-from database import db, init_db
-from dotenv import load_dotenv
 import os
-
-# Load environment variables
-load_dotenv()
+import datetime
+import secrets
+from dotenv import load_dotenv
+import psycopg2
+from flask_mail import Mail, Message
+from flask_cors import CORS
+from flask import Flask, request, jsonify, session, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from flask_session import Session
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
+CORS(app)
+app.secret_key = os.urandom(24)
 
-# Application Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+load_dotenv()
 
-# Initialize database and JWT
-db.init_app(app)
-jwt = JWTManager(app)
+# Mail Configuration
+
 
